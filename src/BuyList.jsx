@@ -1,9 +1,11 @@
-const BuyList = () => (
+
+const BuyList = () => {
+  return (
   <div className="mt-4">
     <h1 className="font-semibold text-2xl">Buy List</h1>
 
     <div className="border border-gray-200 p-4 rounded shadow mt-2 grid grid-cols-1 gap-y-4">
-      {/* 
+      {/*
       ******************************
       * TEMPLATE FOR BUY LIST ITEM *
       ******************************
@@ -43,6 +45,7 @@ const BuyList = () => (
       </div> */}
     </div>
   </div>
-);
+  )
+}
 
 export default BuyList;
