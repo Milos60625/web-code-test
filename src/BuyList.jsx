@@ -1,25 +1,28 @@
 import React from 'react';
 import { useCart } from './Cart';
-import { useDispatchCart } from './Cart'
+import { useDispatchCart } from './Cart';
 
 const BuyList = () => {
   const items = useCart();
-  const dispatch = useDispatchCart();
-  const totalPrice = items.reduce((total,b) => total + b.price, 0)
 
-  const handleRemove = index => {
-      dispatch({type : 'REMOVE', index})
-  }
+  const dispatch = useDispatchCart();
+
+  const handleRemove = (index) => {
+    dispatch({ type: 'REMOVE', index });
+  };
   if (items.length === 0) {
     return <main>Cart is empty</main>;
   }
+
   return (
     <main>
       <p>
         {items.map((item, index) => (
           <div>
             <h4 className="flex flex-1 items-center font-semibold leading-4 mt-2">
-              {item.name}
+              {item.name} $ {item.price}
+            </h4>
+            <h4 className="flex flex-1 items-center font-semibold leading-4 mt-2">
             </h4>
             <button
               type="button"
@@ -41,10 +44,12 @@ const BuyList = () => {
                   d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                 />
               </svg>
-            </button>          </div>
+            </button>{' '}
+          </div>
         ))}
       </p>
     </main>
+
     // <div className="mt-4">
     //   <h1 className="font-semibold text-2xl">Buy List</h1>
 

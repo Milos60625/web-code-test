@@ -1,8 +1,12 @@
 import './App.css';
 import StockProducts from './StockProducts.jsx';
 import BuyList from './BuyList';
+import { useCart } from './Cart';
 
 function App() {
+  const items = useCart();
+  const totalPrice = items.reduce((total, b) => total + b.price, 0);
+
   return (
     <div className="p-10 m-auto bg-blue-50 min-h-screen">
       <div className="border border-gray-300 rounded-lg w-full bg-white p-10 shadow-lg">
@@ -14,9 +18,10 @@ function App() {
 
         <BuyList />
 
+
         <div className="text-right font-semibold text-lg mt-4">
           Total:
-          <span className="text-xl ml-2">$0.00</span>
+          <span className="text-xl ml-2">$ {totalPrice.toFixed(2)}</span>
         </div>
       </div>
     </div>

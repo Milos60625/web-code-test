@@ -1,5 +1,4 @@
 import React, { useReducer, useContext, createContext } from 'react';
-import StockProductsData from './data/stockProducts.json';
 
 const CartStateContext = createContext();
 const CartDispatchContext = createContext();
