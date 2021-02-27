@@ -4,6 +4,7 @@ const CartStateContext = createContext();
 const CartDispatchContext = createContext();
 
 const reducer = (state, action) => {
+  console.log('hello from state', state);
   switch (action.type) {
     case 'ADD':
       return [...state, action.item];
@@ -12,7 +13,7 @@ const reducer = (state, action) => {
       newArr.splice(action.index, 1);
       return newArr;
     default:
-      throw new Error(`Unknown action ${action.type}`);
+      return state;
   }
 };
 
