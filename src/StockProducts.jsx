@@ -1,42 +1,33 @@
 import StockProductsData from './data/stockProducts.json';
 import { useDispatchCart } from './Cart';
 import { useCart } from './Cart';
-import React, {useState} from 'react'
+import React, { useState } from 'react';
 
 const StockProducts = () => {
   const items = useCart();
-  const [alert, setAlert] = useState('')
+  const [alert, setAlert] = useState('');
   const dispatch = useDispatchCart();
-  // const items = useCart();
-  // console.log('items', items)
-  // const [cart, setCart] = useState([]);
-  // console.log('cart', cart)
-  // const addToCart = (stockProductData) => {
-  //   setCart([...cart, stockProductData])
-  // }
+
   const addToCart = (item, qty = 1) => {
-    let added = true;
-    for( let i = 0; i < items.length; i++) {
-      if(items[i].itemNumber === item.itemNumber) added = false
+    let ifAdded = true;
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].itemNumber === item.itemNumber) ifAdded = false;
     }
     item.qty = qty;
-
-    if(added) dispatch({ type: 'ADD', item });
-    else setAlert(`${item.name} is already in your cart.`)
-    //  else console.log('alert')
+    if (ifAdded) dispatch({ type: 'ADD', item });
+    else setAlert(`${item.name} is already in your cart.`);
   };
 
-  // const adjustQty = (item, qty = 1) => {
-  //   item.qty = qty;
-  //   return item
-  // }
+
+
   return (
     <div className="w-full mt-4">
       <h1 className="font-semibold text-2xl">Products</h1>
-      <div className="font-semibold text-lg text-red-500 flex items-center ">{alert}</div>
+      <div className="font-semibold text-lg text-red-500 flex items-center ">
+        {alert}
+      </div>
 
       <div className="flex border border-gray-200 p-2 rounded mt-2 overflow-x-auto">
-
         {StockProductsData.map((stockProductData) => (
           <button
             className="flex flex-col appearance-none border border-gray-200 rounded w-48 p-4 m-2 justify-start items-center hover:bg-gray-100 relative"

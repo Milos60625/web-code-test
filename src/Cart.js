@@ -4,14 +4,20 @@ const CartStateContext = createContext();
 const CartDispatchContext = createContext();
 
 const reducer = (state, action) => {
-  console.log('hello from state', state);
   switch (action.type) {
     case 'ADD':
       return [...state, action.item];
     case 'REMOVE':
-      const newArr = [...state];
-      newArr.splice(action.index, 1);
-      return newArr;
+      const newCopy = [...state];
+      newCopy.splice(action.index, 1);
+      return newCopy;
+    case 'EDIT':
+      return state.map((item) => {
+        if (item.itemNumber === action.item.itemNumber) {
+          item.qty = action.item.qty;
+        }
+        return item;
+      });
     default:
       return state;
   }
