@@ -5,7 +5,8 @@ import { useCart } from './Cart';
 
 function App() {
   const items = useCart();
-  const totalPrice = items.reduce((total, item) => total + item.price * item.qty, 0);
+
+  const totalPrice = items.reduce((total, item) => total + item.price * item.quantity, 0);
   return (
     <div className="p-10 m-auto bg-blue-50 min-h-screen">
       <div className="border border-gray-300 rounded-lg w-full bg-white p-10 shadow-lg">
@@ -16,10 +17,17 @@ function App() {
         Select products below to add to the ordering guide
         <StockProducts />
         <BuyList />
+        {!totalPrice.length ? (
         <div className="text-right font-semibold text-lg mt-4" color="green">
           Total:
           <span className="text-xl ml-2">${totalPrice.toFixed(2)}</span>
         </div>
+        ) : (
+          <div className="text-right font-semibold text-lg mt-4" color="green">
+          Total:
+          <span className="text-xl ml-2">${totalPrice}</span>
+          </div>
+        )}
       </div>
     </div>
   );

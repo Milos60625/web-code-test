@@ -8,17 +8,15 @@ const StockProducts = () => {
   const [alert, setAlert] = useState('');
   const dispatch = useDispatchCart();
 
-  const addToCart = (item, qty = 1) => {
+  const addToCart = (item, quantity = 1) => {
     let ifAdded = true;
     for (let i = 0; i < items.length; i++) {
       if (items[i].itemNumber === item.itemNumber) ifAdded = false;
     }
-    item.qty = qty;
+    item.quantity = quantity;
     if (ifAdded) dispatch({ type: 'ADD', item });
     else setAlert(`${item.name} is already in your cart.`);
   };
-
-
 
   return (
     <div className="w-full mt-4">
@@ -44,9 +42,7 @@ const StockProducts = () => {
             <h4 className="flex flex-1 items-center font-semibold leading-4 mt-2">
               {stockProductData.price}$
             </h4>
-            {/* <h4 className="flex flex-1 items-center font-semibold leading-4 mt-2">{stockProductData.description}</h4> */}
 
-            {/* <button type="button" className="absolute w-8 top-0.5 right-0.5 p-0.5 bg-white shadow rounded-full bg-green-100" onClick={() => addToCart(stockProductData)}> */}
             <button
               type="button"
               className="absolute w-8 top-0.5 right-0.5 p-0.5 bg-white shadow rounded-full bg-green-100"

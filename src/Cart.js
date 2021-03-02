@@ -1,30 +1,38 @@
 import React, { useReducer, useContext, createContext } from 'react';
 
-const CartStateContext = createContext();
 const CartDispatchContext = createContext();
+const CartStateContext = createContext();
 
 const reducer = (state, action) => {
+  let cart;
   switch (action.type) {
     case 'ADD':
-      return [...state, action.item];
+      cart = [...state, action.item];
+      localStorage.setItem('cart', JSON.stringify(cart));
+      return cart;
     case 'REMOVE':
-      const newCopy = [...state];
-      newCopy.splice(action.index, 1);
-      return newCopy;
+      cart = [...state];
+      cart.splice(action.index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      return cart;
     case 'EDIT':
-      return state.map((item) => {
+      cart = state.map((item) => {
         if (item.itemNumber === action.item.itemNumber) {
-          item.qty = action.item.qty;
+          item.quantity = action.item.quantity;
         }
         return item;
       });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      return cart;
     default:
       return state;
   }
 };
 
+const storage = JSON.parse(localStorage.getItem('cart')) || [];
+
 export const CartProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, []);
+  const [state, dispatch] = useReducer(reducer, storage);
   return (
     <CartDispatchContext.Provider value={dispatch}>
       <CartStateContext.Provider value={state}>
